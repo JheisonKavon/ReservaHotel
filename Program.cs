@@ -17,6 +17,7 @@ namespace Hotel{
                     Console.WriteLine("2 - Consultar cliente");
                     Console.WriteLine("3 - Criar reserva");
                     Console.WriteLine("4 - Consultar reserva");
+                    Console.WriteLine("5 - Listar Quartos");
                     Console.WriteLine("0 - Encerrar");
 
                     int.TryParse(Console.ReadLine(), out opcao);
@@ -48,6 +49,9 @@ namespace Hotel{
                                     case 2:
                                         break;
                                 }
+                            break;
+                        case 5:
+                            Quarto.ListarQuartos(hotel);
                             break;
                         case 0:
                             Console.Clear();

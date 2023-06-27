@@ -13,68 +13,30 @@ namespace Hotel{
         public void ReservarQuarto(string cpfCliente, int numQuarto, int qtdPessoas, DateTime checkin, DateTime checkout,int v){
             try{
                 Cliente cliente = clientes.Find(c => c.Cpf == cpfCliente);
-
-                if(cliente == null){
-                    Console.Clear();
-                    Console.WriteLine("Cliente não encontrado!");
-                    Console.ReadLine();
-                    return;
+                int reservaId = reservas.Count + 1;
+                if(reservas.Count != 0){
+                    reservaId = reservas.Last().Id + 1;
                 }
                 if(v == 1){
                     QuartoPadrao quartoPadrao = quartosPadrao.Find(q => q.Numero == numQuarto && q.Disponivel == true);
-                    if(quartoPadrao == null){
-                        Console.Clear();
-                        Console.WriteLine("Quarto não encontrado ou indisponível!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    if(qtdPessoas > quartoPadrao.MaxPessoas){
-                        Console.Clear();
-                        Console.WriteLine("Quantidade de pessoas acima da permitida para esse quarto!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    Reserva reserva = new Reserva(reservas.Last().Id + 1,cliente,quartoPadrao.Numero,qtdPessoas,checkin,checkout);
-                    quartoPadrao.setDisponivel(false);
+                
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoPadrao.Numero,qtdPessoas,checkin,checkout);
                     reservas.Add(reserva);
                 }else if(v == 2){
                     QuartoLuxo quartoLuxo = quartosLuxo.Find(q => q.Numero == numQuarto && q.Disponivel == true);
-                    if(quartoLuxo == null){
-                        Console.Clear();
-                        Console.WriteLine("Quarto não encontrado ou indisponível!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    if(qtdPessoas > quartoLuxo.MaxPessoas){
-                        Console.Clear();
-                        Console.WriteLine("Quantidade de pessoas acima da permitida para esse quarto!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    Reserva reserva = new Reserva(reservas.Last().Id + 1,cliente,quartoLuxo.Numero,qtdPessoas,checkin,checkout);
-                    quartoLuxo.setDisponivel(false);
+                    
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoLuxo.Numero,qtdPessoas,checkin,checkout);
                     reservas.Add(reserva);
                 }else if(v == 3){
                     QuartoMaster quartoMaster = quartosMaster.Find(q => q.Numero == numQuarto && q.Disponivel == true);
-                    if(quartoMaster == null){
-                        Console.Clear();
-                        Console.WriteLine("Quarto não encontrado ou indisponível!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    if(qtdPessoas > quartoMaster.MaxPessoas){
-                        Console.Clear();
-                        Console.WriteLine("Quantidade de pessoas acima da permitida para esse quarto!");
-                        Console.ReadLine();
-                        return;
-                    }
-                    Reserva reserva = new Reserva(reservas.Last().Id + 1,cliente,quartoMaster.Numero,qtdPessoas,checkin,checkout);
-                    quartoMaster.setDisponivel(false);
+                    
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoMaster.Numero,qtdPessoas,checkin,checkout);
                     reservas.Add(reserva);
                 }
                 
                 Console.Clear();
                 Console.WriteLine("Reserva criada com sucesso!");
+                Console.WriteLine($"Data de checkout definida para: {checkout.ToString("dd/MM/yy")}");
                 Console.ReadLine();
 
             }catch(Exception e){
@@ -89,21 +51,6 @@ namespace Hotel{
                 return;
             } 
             reservas.Remove(x);
-            quartosLuxo.ForEach(n => {
-                if(x.NumQuarto == n.Numero){
-                    n.setDisponivel(true);
-                }
-            });
-            quartosPadrao.ForEach(n => {
-                if(x.NumQuarto == n.Numero){
-                    n.setDisponivel(true);
-                }
-            });
-            quartosMaster.ForEach(n => {
-                if(x.NumQuarto == n.Numero){
-                    n.setDisponivel(true);
-                }
-            });
                 
             Reserva.SalvarDadosReserva(hotel);
             QuartoLuxo.SalvarDadosQuartos(hotel);
