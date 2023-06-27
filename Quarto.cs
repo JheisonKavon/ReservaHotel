@@ -29,9 +29,9 @@ namespace Hotel{
         }
 
         public static void SalvarDadosQuartos(Hotel hotel){
-            File.WriteAllText("quartosLuxo.json", JsonConvert.SerializeObject(hotel.quartosLuxo));
-            File.WriteAllText("quartosPadrao.json", JsonConvert.SerializeObject(hotel.quartosPadrao));
-            File.WriteAllText("quartosMaster.json", JsonConvert.SerializeObject(hotel.quartosMaster));
+            File.WriteAllText("src/quartosLuxo.json", JsonConvert.SerializeObject(hotel.quartosLuxo));
+            File.WriteAllText("src/quartosPadrao.json", JsonConvert.SerializeObject(hotel.quartosPadrao));
+            File.WriteAllText("src/quartosMaster.json", JsonConvert.SerializeObject(hotel.quartosMaster));
         }
     }
 

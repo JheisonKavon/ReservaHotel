@@ -11,19 +11,23 @@ namespace Hotel{
             base.ExibirPessoas();
         }
         public static void CadastroCliente(Hotel hotel){
-                    Console.Clear();
-                    Console.WriteLine("Digite o nome do cliente:");
-                    string nomeCliente = hotel.NullString(Console.ReadLine());
-                    Console.WriteLine("\nDigite o CPF do cliente:");
-                    string cpfCliente = hotel.NullString(Console.ReadLine());
-                    Console.WriteLine("\nDigite o telefone do cliente:");
-                    string numCliente = hotel.NullString(Console.ReadLine());
-                    Cliente cliente = new Cliente(hotel.clientes.Last().Id + 1,cpfCliente,nomeCliente,numCliente);
-                    hotel.clientes.Add(cliente);
-                    SalvarDadosCliente(hotel);
-                    Console.Clear();
-                    Console.WriteLine("Cliente salvo com sucesso!");
-                    Console.ReadLine();
+            try{
+                Console.Clear();
+                Console.WriteLine("Digite o nome do cliente:");
+                string nomeCliente = hotel.NullString(Console.ReadLine());
+                Console.WriteLine("\nDigite o CPF do cliente:");
+                string cpfCliente = hotel.NullString(Console.ReadLine());
+                Console.WriteLine("\nDigite o telefone do cliente:");
+                string numCliente = hotel.NullString(Console.ReadLine());
+                Cliente cliente = new Cliente(hotel.clientes.Last().Id + 1,cpfCliente,nomeCliente,numCliente);
+                hotel.clientes.Add(cliente);
+                SalvarDadosCliente(hotel);
+                Console.Clear();
+                Console.WriteLine("Cliente salvo com sucesso!");
+                Console.ReadLine();
+            }catch(Exception e){
+                throw new ArgumentException($"Erro ao cadastrar o cliente: {e}");
+            }
         }
         public static void ConsultaClientes(Hotel hotel){
             var table = new ConsoleTable("Id","Nome","CPF"); 
@@ -35,8 +39,7 @@ namespace Hotel{
             Console.ReadLine();
         }
         public static void SalvarDadosCliente(Hotel hotel){
-            Console.Clear();
-            File.WriteAllText("clientes.json",  JsonConvert.SerializeObject(hotel.clientes));
+            File.WriteAllText("src/clientes.json",  JsonConvert.SerializeObject(hotel.clientes));
         }
     }
 }

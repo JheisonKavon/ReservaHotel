@@ -78,7 +78,7 @@ namespace Hotel{
                 Console.ReadLine();
 
             }catch(Exception e){
-                Console.WriteLine("Ocorreu um erro: "+e);
+                throw new ArgumentException($"Erro ao cadastrar a reserva: {e}");
             }
         }
         public void CancelarReservaQuarto(int verificador,Hotel hotel){
@@ -112,20 +112,20 @@ namespace Hotel{
             Console.ReadLine();
         }
         public void CarregarDados(){
-            if(File.Exists("clientes.json")){
-                clientes = JsonConvert.DeserializeObject<List<Cliente>>(File.ReadAllText("clientes.json"));
+            if(File.Exists("src/clientes.json")){
+                clientes = JsonConvert.DeserializeObject<List<Cliente>>(File.ReadAllText("src/clientes.json"));
             }
-            if(File.Exists("quartosLuxo.json")){
-                quartosLuxo = JsonConvert.DeserializeObject<List<QuartoLuxo>>(File.ReadAllText("quartosLuxo.json"));
+            if(File.Exists("src/quartosLuxo.json")){
+                quartosLuxo = JsonConvert.DeserializeObject<List<QuartoLuxo>>(File.ReadAllText("src/quartosLuxo.json"));
             }
-            if(File.Exists("quartosPadrao.json")){
-                quartosPadrao = JsonConvert.DeserializeObject<List<QuartoPadrao>>(File.ReadAllText("quartosPadrao.json"));
+            if(File.Exists("src/quartosPadrao.json")){
+                quartosPadrao = JsonConvert.DeserializeObject<List<QuartoPadrao>>(File.ReadAllText("src/quartosPadrao.json"));
             }
-            if(File.Exists("quartosMaster.json")){
-                quartosMaster = JsonConvert.DeserializeObject<List<QuartoMaster>>(File.ReadAllText("quartosMaster.json"));
+            if(File.Exists("src/quartosMaster.json")){
+                quartosMaster = JsonConvert.DeserializeObject<List<QuartoMaster>>(File.ReadAllText("src/quartosMaster.json"));
             }
-            if(File.Exists("reservas.json")){
-                reservas = JsonConvert.DeserializeObject<List<Reserva>>(File.ReadAllText("reservas.json"));
+            if(File.Exists("src/reservas.json")){
+                reservas = JsonConvert.DeserializeObject<List<Reserva>>(File.ReadAllText("src/reservas.json"));
             }
         }
         public string NullString(string? s){

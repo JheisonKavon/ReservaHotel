@@ -1,1 +1,0 @@
-[{"Id":2,"Cliente":{"Cpf":"098098098","Nome":"Thallison","Id":5,"Telefone":"42984259129"},"NumQuarto":9,"QntPessoas":0,"Check_in":"2023-12-15T00:00:00","Check_out":"2025-12-25T00:00:00"},{"Id":3,"Cliente":{"Cpf":"098098098","Nome":"Thallison","Id":5,"Telefone":"42984259129"},"NumQuarto":8,"QntPessoas":2,"Check_in":"2023-10-20T00:00:00","Check_out":"2024-07-19T00:00:00"}]
