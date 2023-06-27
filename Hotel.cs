@@ -10,7 +10,7 @@ namespace Hotel{
         public List<QuartoMaster> quartosMaster = new List<QuartoMaster>();
         public List<Reserva> reservas = new List<Reserva>();
 
-        public void ReservarQuarto(string cpfCliente, int numQuarto, int qtdPessoas, DateTime checkin, DateTime checkout,int v){
+        public void ReservarQuarto(string cpfCliente, int numQuarto, int qtdPessoas, DateTime checkin, DateTime checkout,int v, int dias){
             try{
                 Cliente cliente = clientes.Find(c => c.Cpf == cpfCliente);
                 int reservaId = reservas.Count + 1;
@@ -20,17 +20,17 @@ namespace Hotel{
                 if(v == 1){
                     QuartoPadrao quartoPadrao = quartosPadrao.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                 
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoPadrao.Numero,qtdPessoas,checkin,checkout);
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoPadrao.Numero,qtdPessoas,checkin,checkout, quartoPadrao.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }else if(v == 2){
                     QuartoLuxo quartoLuxo = quartosLuxo.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                     
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoLuxo.Numero,qtdPessoas,checkin,checkout);
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoLuxo.Numero,qtdPessoas,checkin,checkout, quartoLuxo.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }else if(v == 3){
                     QuartoMaster quartoMaster = quartosMaster.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                     
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoMaster.Numero,qtdPessoas,checkin,checkout);
+                    Reserva reserva = new Reserva(reservaId,cliente,quartoMaster.Numero,qtdPessoas,checkin,checkout, quartoMaster.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }
                 
