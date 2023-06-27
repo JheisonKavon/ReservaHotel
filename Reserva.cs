@@ -133,7 +133,7 @@ namespace Hotel{
             var table = new ConsoleTable("ID","N°Quarto","Cliente","Checkin","Checkout","Total"); 
             Console.Clear(); 
             hotel.reservas.ForEach(obj => {
-                table.AddRow(obj.Id, obj.NumQuarto, obj.Cliente.Nome, obj.Check_in.ToString("dd/MM/yy"), obj.Check_out.ToString("d/MM/yy"), "R$"+obj.ValorReserva);
+                table.AddRow(obj.Id, obj.NumQuarto, obj.Cliente.Nome, obj.Check_in.ToString("dd/MM/yy"), obj.Check_out.ToString("dd/MM/yy"), "R$"+obj.ValorReserva);
             });
             table.Write();
         }
