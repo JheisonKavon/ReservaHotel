@@ -1,0 +1,20 @@
+[
+    {"Cpf": "11111111111",
+    "Nome": "admin",
+    "Id": 1,
+    "Telefone": "78433242",
+    "Senha": "123"
+    },
+    {"Cpf": "11111111111",
+    "Nome": "Juliano",
+    "Id": 2,
+    "Telefone": "78433242",
+    "Senha": "123"
+    },
+    {"Cpf": "11111111111",
+    "Nome": "Roberto",
+    "Id": 3,
+    "Telefone": "78433242",
+    "Senha": "123"
+    }
+]

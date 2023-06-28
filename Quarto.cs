@@ -14,39 +14,147 @@ namespace Hotel{
         }
 
         public static void ListarQuartos(Hotel hotel){
-            var table = new ConsoleTable("N°","Tipo","Disponível"); 
+            var table = new ConsoleTable("N°","Tipo","Disponível","Suite","Hidro","Valor diária"); 
             Console.Clear();
             hotel.quartosPadrao.ForEach(o => {
-                table.AddRow(o.Numero, "Padrão", o.Disponivel);
+                table.AddRow(o.Numero, "Padrão", o.Disponivel,"","","R$"+o.ValorDiaria);
             });
         
             hotel.quartosLuxo.ForEach(o => {
-                table.AddRow(o.Numero, "Luxo", o.Disponivel);
+                table.AddRow(o.Numero, "Luxo", o.Disponivel,o.Suite,"","R$"+o.ValorDiaria);
             });
         
             hotel.quartosMaster.ForEach(o => {
-                table.AddRow(o.Numero, "Master", o.Disponivel);
+                table.AddRow(o.Numero, "Master", o.Disponivel,o.Suite,o.Hidro,"R$"+o.ValorDiaria);
             });
             table.Write();
+            ModificarQuartos(hotel);
+        }
+        public static void ModificarQuartos(Hotel hotel){
             Console.WriteLine("\nSelecione uma opção:");
             Console.WriteLine("1 - Alterar disponibilidade");
-            Console.WriteLine("2 - Voltar");
+            Console.WriteLine("2 - Alterar suite");
+            Console.WriteLine("3 - Alterar hidro");
+            Console.WriteLine("4 - Alterar valor diária");
+            Console.WriteLine("0 - Voltar");
             int v = Int32.Parse(hotel.NullString(Console.ReadLine()));
             if(v == 1){
-                Console.WriteLine("Digite o número do quarto");
+                Console.WriteLine("\nDigite o número do quarto");
                 int num = Int32.Parse(hotel.NullString(Console.ReadLine()));
                 AlterarDisponibilidade(hotel,num);
-            }else{
+            }else if(v == 2){
+                Console.WriteLine("\nDigite o número de um quarto de luxo ou master");
+                int num = Int32.Parse(hotel.NullString(Console.ReadLine()));
+                AlterarSuite(hotel,num);
+            }else if(v == 3){
+                Console.WriteLine("\nDigite o número de um quarto master");
+                int num = Int32.Parse(hotel.NullString(Console.ReadLine()));
+                ALterarHidro(hotel,num);
+            }else if(v == 4){
+                Console.WriteLine("\nDigite o número do quarto");
+                int num = Int32.Parse(hotel.NullString(Console.ReadLine()));
+                Console.WriteLine("\nDigite o novo valor da diária");
+                double valor = Double.Parse(hotel.NullString(Console.ReadLine()));
+                AlterarValorDiaria(hotel,num,valor);
+            }
+            else{
                 return;
             }
         }
+        public static void AlterarValorDiaria(Hotel hotel,int num,double valor){
+            bool achou = false;
+            hotel.quartosLuxo.ForEach(n => {
+                if(num == n.Numero){
+                    n.ValorDiaria = valor;
+                    Console.Clear();
+                    Console.WriteLine("Diária alterada com sucesso");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            hotel.quartosPadrao.ForEach(n => {
+                if(num == n.Numero){
+                    n.ValorDiaria = valor;
+                    Console.Clear();
+                    Console.WriteLine("Diária alterada com sucesso");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            hotel.quartosMaster.ForEach(n => {
+                if(num == n.Numero){
+                    n.ValorDiaria = valor;
+                    Console.Clear();
+                    Console.WriteLine("Diária alterada com sucesso");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            if(achou)
+                return;
+            Console.Clear();
+            Console.WriteLine("Número de quarto inválido");
+            Console.ReadLine();
+        }
+        public static void ALterarHidro(Hotel hotel,int num){
+            bool achou = false;
+            hotel.quartosMaster.ForEach(n => {
+                if(num == n.Numero){
+                    n.setHidro(!n.Hidro);
+                    Console.Clear();
+                    Console.WriteLine("Hidro alterada!");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            if(achou)
+                return;
+            Console.Clear();
+            Console.WriteLine("Número de quarto inválido");
+            Console.ReadLine();
+        }
+        public static void AlterarSuite(Hotel hotel, int num){
+            bool achou = false;
+            hotel.quartosLuxo.ForEach(n => {
+                if(num == n.Numero){
+                    n.setSuite(!n.Suite);
+                    Console.Clear();
+                    Console.WriteLine("Suite alterada!");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            hotel.quartosMaster.ForEach(n => {
+                if(num == n.Numero){
+                    n.setSuite(!n.Suite);
+                    Console.Clear();
+                    Console.WriteLine("Suite alterada!");
+                    Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
+                }
+            });
+            if(achou)
+                return;
+            Console.Clear();
+            Console.WriteLine("Número de quarto inválido");
+            Console.ReadLine();
+        }
         public static void AlterarDisponibilidade(Hotel hotel, int num){
+            bool achou = false;
             hotel.quartosLuxo.ForEach(n => {
                 if(num == n.Numero){
                     n.setDisponivel(!n.Disponivel);
                     Console.Clear();
                     Console.WriteLine("Disponibilidade alterada com sucesso");
                     Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
                 }
             });
             hotel.quartosPadrao.ForEach(n => {
@@ -55,6 +163,8 @@ namespace Hotel{
                     Console.Clear();
                     Console.WriteLine("Disponibilidade alterada com sucesso");
                     Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
                 }
             });
             hotel.quartosMaster.ForEach(n => {
@@ -63,9 +173,15 @@ namespace Hotel{
                     Console.Clear();
                     Console.WriteLine("Disponibilidade alterada com sucesso");
                     Console.ReadLine();
+                    SalvarDadosQuartos(hotel);
+                    achou = true;
                 }
             });
-            SalvarDadosQuartos(hotel);
+            if(achou)
+                return;
+            Console.Clear();
+            Console.WriteLine("Número de quarto inválido");
+            Console.ReadLine();
         }
         public static void CriaQuarto(Hotel hotel){
             try{   

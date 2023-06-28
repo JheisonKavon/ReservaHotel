@@ -7,9 +7,27 @@ namespace Hotel{
             
             int opcao;
             Hotel hotel = new Hotel();
+            Funcionario funcionarioAtual = Funcionario.ProcuraFuncionario(hotel,"","");
 
                 do{
                     hotel.CarregarDados();
+
+                    while(funcionarioAtual == null){
+                        Console.Clear();
+                        Console.WriteLine("----| Login |----");
+                        Console.WriteLine("Usuário:");
+                        string usuario = hotel.NullString(Console.ReadLine());
+                        Console.WriteLine("Senha:");
+                        string senha = hotel.NullString(Console.ReadLine());
+                        funcionarioAtual = Funcionario.ProcuraFuncionario(hotel,usuario,senha);
+                        if(funcionarioAtual == null){
+                            Console.Clear();
+                            Console.WriteLine("Usuário ou senha incorreta");
+                            Console.ReadLine();
+                            return;
+                        }
+                    }
+
                     Console.Clear();
                     Console.WriteLine("----| Bem vindo ao Hotel |----");
                     Console.WriteLine("Selecione a opção desejada:");
@@ -28,10 +46,10 @@ namespace Hotel{
                             Cliente.CadastroCliente(hotel);
                             break;
                         case 2:
-                            Cliente.ConsultaClientes(hotel);
+                            Cliente.ConsultaPessoas(hotel);
                             break;
                         case 3:
-                            Reserva.CriaReserva(hotel);
+                            Reserva.CriaReserva(hotel,funcionarioAtual);
                             break;
                         case 4:
                             int opcaoReserva;

@@ -7,15 +7,17 @@ namespace Hotel{
 
         public int Id {get;private set;}
         public Cliente Cliente{get;private set;}
+        public Funcionario Funcionario{get;private set;}
         public int NumQuarto{get;private set;}
         public int QntPessoas{get;private set;}
         public DateTime Check_in{get;private set;}
         public DateTime Check_out{get;private set;}
         public double ValorReserva{get;private set;}
 
-        public Reserva(int id,Cliente cliente,int numQuarto, int qtdPessoas, DateTime check_in, DateTime check_out,double valorReserva){
+        public Reserva(int id,Cliente cliente,Funcionario funcionario,int numQuarto, int qtdPessoas, DateTime check_in, DateTime check_out,double valorReserva){
             Id = id;
             Cliente = cliente;
+            Funcionario = funcionario;
             NumQuarto = numQuarto;
             QntPessoas = qtdPessoas;
             Check_in = check_in;
@@ -23,7 +25,7 @@ namespace Hotel{
             ValorReserva = valorReserva;
         }
 
-        public static void CriaReserva(Hotel hotel){
+        public static void CriaReserva(Hotel hotel,Funcionario funcionario){
             try{
                 Console.Clear();
                 Console.WriteLine("Qual tipo de quarto deseja reservar?");
@@ -117,7 +119,7 @@ namespace Hotel{
                     return;
                 }
 
-                hotel.ReservarQuarto(cpf,numQUarto,qtdPessoas,checkin,checkout,v,dia);
+                hotel.ReservarQuarto(cpf,numQUarto,qtdPessoas,checkin,checkout,v,dia,funcionario);
                 
                 SalvarDadosReserva(hotel);
                 Quarto.SalvarDadosQuartos(hotel);
@@ -130,10 +132,10 @@ namespace Hotel{
             File.WriteAllText("src/reservas.json",  JsonConvert.SerializeObject(hotel.reservas));
         }
         public static void ListarReservas(Hotel hotel){
-            var table = new ConsoleTable("ID","N°Quarto","Cliente","Checkin","Checkout","Total"); 
+            var table = new ConsoleTable("ID","N°Quarto","Cliente","Checkin","Checkout","Total","Funcionário"); 
             Console.Clear(); 
             hotel.reservas.ForEach(obj => {
-                table.AddRow(obj.Id, obj.NumQuarto, obj.Cliente.Nome, obj.Check_in.ToString("dd/MM/yy"), obj.Check_out.ToString("dd/MM/yy"), "R$"+obj.ValorReserva);
+                table.AddRow(obj.Id, obj.NumQuarto, obj.Cliente.Nome, obj.Check_in.ToString("dd/MM/yy"), obj.Check_out.ToString("dd/MM/yy"), "R$"+obj.ValorReserva,obj.Funcionario.Nome);
             });
             table.Write();
         }

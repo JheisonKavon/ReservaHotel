@@ -1,4 +1,5 @@
 using System;
+using ConsoleTables;
 
 namespace Hotel{
 
@@ -8,15 +9,19 @@ namespace Hotel{
         public int Id{get;protected set;}
         public string Telefone{get;protected set;}
 
-        public Pessoa(int id,string cpf, string nome, string telefone){
-            Id = id;
-            Cpf = cpf;
-            Nome = nome;
-            Telefone = telefone;
-        }
+        
 
-        public virtual void ExibirPessoas(){
-            Console.WriteLine($"CPF: {Cpf}, nome: {Nome}");
+        public static void ConsultaPessoas(Hotel hotel){
+            var table = new ConsoleTable("Id","Nome"); 
+            Console.Clear();
+            hotel.clientes.ForEach(obj => {
+                table.AddRow(obj.Id, obj.Nome);
+            });
+            hotel.funcionarios.ForEach(obj => {
+                table.AddRow(obj.Id, obj.Nome);
+            });
+            table.Write();
+            Console.ReadLine();
         }
     }
 }

@@ -1,1 +1,23 @@
-[{"Id":1,"Cliente":{"Cpf":"12312312312","Nome":"Jheison","Id":1,"Telefone":"78433242"},"NumQuarto":303,"QntPessoas":0,"Check_in":"2023-12-20T00:00:00","Check_out":"2024-01-07T00:00:00","ValorReserva":9000.0},{"Id":2,"Cliente":{"Cpf":"80030565006","Nome":"Edivan","Id":4,"Telefone":"4219723468"},"NumQuarto":101,"QntPessoas":0,"Check_in":"2023-07-10T00:00:00","Check_out":"2023-07-15T00:00:00","ValorReserva":500.0},{"Id":3,"Cliente":{"Cpf":"12312312312","Nome":"Jheison","Id":1,"Telefone":"78433242"},"NumQuarto":102,"QntPessoas":0,"Check_in":"2023-07-12T00:00:00","Check_out":"2023-07-16T00:00:00","ValorReserva":400.0},{"Id":4,"Cliente":{"Cpf":"098098098","Nome":"Thallison","Id":5,"Telefone":"42984259129"},"NumQuarto":302,"QntPessoas":5,"Check_in":"2023-12-20T00:00:00","Check_out":"2024-03-19T00:00:00","ValorReserva":45000.0}]
+[
+    {
+        "Id": 1,
+        "Cliente": {
+            "Cpf": "12312312312",
+            "Nome": "Jheison",
+            "Id": 1,
+            "Telefone": "78433242"
+        },
+        "Funcionario": {
+            "Senha": "123",
+            "Cpf": "11111111111",
+            "Nome": "Roberto",
+            "Id": 3,
+            "Telefone": "78433242"
+        },
+        "NumQuarto": 304,
+        "QntPessoas": 5,
+        "Check_in": "2023-12-20T00:00:00",
+        "Check_out": "2024-01-14T00:00:00",
+        "ValorReserva": 12500.0
+    }
+]

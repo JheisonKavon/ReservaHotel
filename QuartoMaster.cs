@@ -13,5 +13,11 @@ namespace Hotel{
             Suite = suite;
             Hidro = hidro;
         }
+        public void setSuite(bool suite){
+            Suite = suite;
+        }
+        public void setHidro(bool hidro){
+            Hidro = hidro;
+        }
     }
 }

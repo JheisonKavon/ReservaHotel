@@ -11,16 +11,8 @@ namespace Hotel{
             MaxPessoas = maxPessoas;
             Suite = suite;
         }
-
-        public static void ConsultaQuartosLuxo(Hotel hotel){
-            for(int i=0;i < hotel.quartosLuxo.Count; i++){
-                Console.Clear();
-                Console.WriteLine("ID          Nome");    
-                hotel.quartosLuxo.ForEach(obj => {
-                    Console.Write($"{obj.Numero}          ");
-                });
-                Console.ReadLine();
-            }
+        public void setSuite(bool suite){
+            Suite = suite;
         }
     }
 }

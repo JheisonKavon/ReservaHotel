@@ -5,12 +5,13 @@ namespace Hotel{
 
     public class Hotel{
         public List<Cliente> clientes = new List<Cliente>();
+        public List<Funcionario> funcionarios = new List<Funcionario>();
         public List<QuartoPadrao> quartosPadrao = new List<QuartoPadrao>();
         public List<QuartoLuxo> quartosLuxo = new List<QuartoLuxo>();
         public List<QuartoMaster> quartosMaster = new List<QuartoMaster>();
         public List<Reserva> reservas = new List<Reserva>();
 
-        public void ReservarQuarto(string cpfCliente, int numQuarto, int qtdPessoas, DateTime checkin, DateTime checkout,int v, int dias){
+        public void ReservarQuarto(string cpfCliente, int numQuarto, int qtdPessoas, DateTime checkin, DateTime checkout,int v, int dias,Funcionario funcionario){
             try{
                 Cliente cliente = clientes.Find(c => c.Cpf == cpfCliente);
                 int reservaId = reservas.Count + 1;
@@ -20,17 +21,17 @@ namespace Hotel{
                 if(v == 1){
                     QuartoPadrao quartoPadrao = quartosPadrao.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                 
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoPadrao.Numero,qtdPessoas,checkin,checkout, quartoPadrao.ValorDiaria*(dias));
+                    Reserva reserva = new Reserva(reservaId,cliente,funcionario,quartoPadrao.Numero,qtdPessoas,checkin,checkout, quartoPadrao.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }else if(v == 2){
                     QuartoLuxo quartoLuxo = quartosLuxo.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                     
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoLuxo.Numero,qtdPessoas,checkin,checkout, quartoLuxo.ValorDiaria*(dias));
+                    Reserva reserva = new Reserva(reservaId,cliente,funcionario,quartoLuxo.Numero,qtdPessoas,checkin,checkout, quartoLuxo.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }else if(v == 3){
                     QuartoMaster quartoMaster = quartosMaster.Find(q => q.Numero == numQuarto && q.Disponivel == true);
                     
-                    Reserva reserva = new Reserva(reservaId,cliente,quartoMaster.Numero,qtdPessoas,checkin,checkout, quartoMaster.ValorDiaria*(dias));
+                    Reserva reserva = new Reserva(reservaId,cliente,funcionario,quartoMaster.Numero,qtdPessoas,checkin,checkout, quartoMaster.ValorDiaria*(dias));
                     reservas.Add(reserva);
                 }
                 
@@ -61,6 +62,9 @@ namespace Hotel{
         public void CarregarDados(){
             if(File.Exists("src/clientes.json")){
                 clientes = JsonConvert.DeserializeObject<List<Cliente>>(File.ReadAllText("src/clientes.json"));
+            }
+            if(File.Exists("src/funcionarios.json")){
+                funcionarios = JsonConvert.DeserializeObject<List<Funcionario>>(File.ReadAllText("src/funcionarios.json"));
             }
             if(File.Exists("src/quartosLuxo.json")){
                 quartosLuxo = JsonConvert.DeserializeObject<List<QuartoLuxo>>(File.ReadAllText("src/quartosLuxo.json"));

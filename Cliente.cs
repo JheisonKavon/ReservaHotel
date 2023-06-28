@@ -5,11 +5,13 @@ using ConsoleTables;
 namespace Hotel{
 
     public class Cliente : Pessoa{
-        public Cliente(int id, string cpf, string nome, string telefone) : base(id, cpf, nome, telefone){}
-
-        public override void ExibirPessoas(){
-            base.ExibirPessoas();
+        public Cliente(int id,string cpf, string nome, string telefone){
+            Id = id;
+            Cpf = cpf;
+            Nome = nome;
+            Telefone = telefone;
         }
+
         public static void CadastroCliente(Hotel hotel){
             try{
                 Console.Clear();
@@ -29,7 +31,7 @@ namespace Hotel{
                 throw new ArgumentException($"Erro ao cadastrar o cliente: {e}");
             }
         }
-        public static void ConsultaClientes(Hotel hotel){
+        public new static void ConsultaPessoas(Hotel hotel){
             var table = new ConsoleTable("Id","Nome","CPF"); 
             Console.Clear();
             hotel.clientes.ForEach(obj => {
