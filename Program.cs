@@ -18,13 +18,30 @@ namespace Hotel{
                         Console.WriteLine("Usuário:");
                         string usuario = hotel.NullString(Console.ReadLine());
                         Console.WriteLine("Senha:");
-                        string senha = hotel.NullString(Console.ReadLine());
+                        string senha = "";
+                        ConsoleKeyInfo key;
+                        do{
+                            key = Console.ReadKey(true);
+                            if (key.Key == ConsoleKey.Backspace){
+                                Console.Write("\b");
+                            }else if (!char.IsControl(key.KeyChar)){
+                                senha += key.KeyChar;
+                                Console.Write("*");
+                            }
+                        }
+                        while (key.Key != ConsoleKey.Enter);
                         funcionarioAtual = Funcionario.ProcuraFuncionario(hotel,usuario,senha);
                         if(funcionarioAtual == null){
                             Console.Clear();
                             Console.WriteLine("Usuário ou senha incorreta");
-                            Console.ReadLine();
-                            return;
+                            Console.WriteLine("1 - Voltar");
+                            Console.WriteLine("0 - Sair");
+                            int v = Int32.Parse(hotel.NullString(Console.ReadLine()));
+                            if(v == 0){
+                                Console.Clear();
+                                Console.WriteLine("Sistema encerrado!");
+                                Environment.Exit(0); 
+                            }
                         }
                     }
 

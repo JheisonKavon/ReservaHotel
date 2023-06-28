@@ -30,6 +30,21 @@ namespace Hotel{
             table.Write();
             ModificarQuartos(hotel);
         }
+        public static void ListarQuartos(Hotel hotel,int v){
+            if(v == 2){
+                hotel.quartosLuxo.ForEach(n => {
+                    Console.WriteLine($"N° {n.Numero}");
+            });
+            }else if(v == 1){
+                hotel.quartosPadrao.ForEach(n => {
+                    Console.WriteLine($"N° {n.Numero}");
+            });
+            }else if(v == 3){
+                hotel.quartosMaster.ForEach(n => {
+                    Console.WriteLine($"N° {n.Numero}");
+            });
+            }
+        }
         public static void ModificarQuartos(Hotel hotel){
             Console.WriteLine("\nSelecione uma opção:");
             Console.WriteLine("1 - Alterar disponibilidade");

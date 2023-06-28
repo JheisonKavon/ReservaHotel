@@ -50,7 +50,7 @@ namespace Hotel{
                 Console.Clear();
                 
                 Console.WriteLine("Digite o número do quarto:");
-                ListarQuartos(hotel,v);
+                Quarto.ListarQuartos(hotel,v);
                 int numQUarto = Int32.Parse(hotel.NullString(Console.ReadLine()));
                 if(hotel.quartosPadrao.Find(q => q.Numero == numQUarto && q.Disponivel == true) == null && v == 1){
                     Console.Clear();
@@ -149,20 +149,6 @@ namespace Hotel{
             });
             return retorno;
         }
-        public static void ListarQuartos(Hotel hotel,int v){
-            if(v == 2){
-                hotel.quartosLuxo.ForEach(n => {
-                    Console.WriteLine($"N° {n.Numero}");
-            });
-            }else if(v == 1){
-                hotel.quartosPadrao.ForEach(n => {
-                    Console.WriteLine($"N° {n.Numero}");
-            });
-            }else if(v == 3){
-                hotel.quartosMaster.ForEach(n => {
-                    Console.WriteLine($"N° {n.Numero}");
-            });
-            }
-        }
+
     }
 }
